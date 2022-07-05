@@ -5,6 +5,8 @@ from flask import render_template
 from datetime import timedelta
 from flask import request, session, jsonify
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
 assignment_4 = Blueprint('assignment_4', __name__,
                   static_folder='static',
@@ -19,26 +21,29 @@ def users():
 
 def interact_db(query, query_type: str):
     return_value = False
-    connection = mysql.connector.connect(host='localhost',
-                                         user='root',
-                                         passwd='bd121212',
-                                         database='my_flask_db')
+    connection = mysql.connector.connect(host=os.getenv('DB_HOST'),
+                                         user=os.getenv('DB_USER'),
+                                         passwd=os.getenv('DB_PASSWORD'),
+                                         database=os.getenv('DB_NAME'))
     cursor = connection.cursor(named_tuple=True)
     cursor.execute(query)
     #
 
     if query_type == 'commit':
+        # Use for INSERT, UPDATE, DELETE statements.
+        # Returns: The number of rows affected by the query (a non-negative int).
         connection.commit()
         return_value = True
 
     if query_type == 'fetch':
+        # Use for SELECT statement.
+        # Returns: False if the query failed, or the result of the query if it succeeded.
         query_result = cursor.fetchall()
         return_value = query_result
 
     connection.close()
     cursor.close()
     return return_value
-
 
 
 @assignment_4.route('/insert_user', methods=['POST'])

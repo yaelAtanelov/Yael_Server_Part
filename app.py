@@ -5,12 +5,14 @@ from datetime import timedelta
 from flask import request, session, jsonify
 import mysql.connector
 import requests
+import os
+from dotenv import load_dotenv
 
 
 app = Flask(__name__)
 
 
-app.secret_key = '123'
+app.secret_key = 'SECRET_KEY'
 app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
 
