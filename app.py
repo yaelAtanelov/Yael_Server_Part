@@ -9,6 +9,7 @@ import requests
 
 app = Flask(__name__)
 
+
 app.secret_key = '123'
 app.config['SESSION_PERMANENT'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=20)
