@@ -109,7 +109,7 @@ def restapi_users(USER_ID):
 
     if len(users_list) ==0:
         return_dict= {
-            'message': 'user not found'
+            'message': f'user {USER_ID} not found'
         }
     else:
         users_list = users_list[0]

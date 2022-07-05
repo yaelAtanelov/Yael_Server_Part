@@ -46,13 +46,6 @@
     {% if v_id %}
         {% for user in users %}
             {% if v_id == user.id %}
-                <form action="/update_email" method="post">
-                    <input type="hidden" name="user_id" value="{{ v_id }}">
-                    <li><h3>Email: {{ user.Email }} </h3></li>
-                    <input type="email" name="email" placeholder="New Email">
-                    <input type="submit" value="Update"><br>
-                </form>
-
                 <form action="/update_song" method="post">
                     <input type="hidden" name="user_id" value="{{ v_id }}">
                     <li><h3>Favorite current song: {{ user.fav_song }} </h3></li>
